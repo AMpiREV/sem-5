@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Добро пожаловать на мероприятие!</h1>
+{% if user %}
+    <p>Рады видеть вас, {{ user['fio'] }}!</p>
+{% else %}
+    <p>Пожалуйста, <a href="{{ url_for('login') }}">войдите</a>, чтобы получить доступ к системе.</p>
+{% endif %}
+{% endblock %}

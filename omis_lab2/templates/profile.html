@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Личный кабинет{% endblock %}
+
+{% block content %}
+<h1>Личный кабинет</h1>
+
+{% if user %}
+    <p><strong>ФИО:</strong> {{ user.fio }}</p>
+    <p><strong>Роль:</strong> {{ user.get_role() }}</p>
+    <p><strong>Логин:</strong> {{ user.login }}</p>
+    <p><strong>Пароль:</strong> ****** (скрыт)</p>
+{% if user.company %}
+    <p><strong>Компания:</strong> {{ user.company }}</p>
+    <p><strong>Мероприятие:</strong> {{ user.events }}</p>
+{% endif %}
+{% if user.workplace %}
+    <p><strong>Место работы:</strong> {{ user.workplace }}</p>
+    <p><strong>Мероприятие:</strong> {{ user.events }}</p>
+{% endif %}
+{% if user.tools %}
+    <p><strong>Инструменты:</strong> {{ user.tools }}</p>
+{% endif %}
+    
+    <a href="{{ url_for('logout') }}">Выйти</a>
+{% else %}
+    <p>Вы не авторизованы. <a href="{{ url_for('login') }}">Войдите</a>.</p>
+{% endif %}
+{% endblock %}

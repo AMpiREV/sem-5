@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Пользователи{% endblock %}
+
+{% block content %}
+<h1>Список пользователей</h1>
+
+{% if user %}
+
+<h2>Организаторы</h2>
+<ul>
+    {% for user in organizers %}
+    <li>{{ user.fio }} (Компания: {{ user.company }})</li>
+    {% endfor %}
+</ul>
+
+<h2>Участники</h2>
+<ul>
+    {% for user in participants %}
+    <li>{{ user.fio }} (Место работы: {{ user.workplace }})</li>
+    {% endfor %}
+</ul>
+
+<h2>Модераторы</h2>
+<ul>
+    {% for user in moderators %}
+    <li>{{ user.fio }} (Инструменты: {{ ', '.join(user.tools) }})</li>
+    {% endfor %}
+</ul>
+
+{% else %}
+    <p>Вы не авторизованы. <a href="{{ url_for('login') }}">Войдите</a>.</p>
+{% endif %}
+{% endblock %}

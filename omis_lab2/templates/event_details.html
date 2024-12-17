@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Мероприятия{% endblock %}
+
+{% block content %}
+<h1>Список мероприятий</h1>
+{% if user %}
+    <ul>
+        {% for event in events %}
+        <li>
+            <h2>{{ event.name }}</h2>
+            <p><strong>Описание:</strong> {{ event.description }}</p>
+            <p><strong>Дата:</strong> {{ event.date }}</p>
+            <p><strong>Начало:</strong> {{ event.time }}</p>
+            <p><strong>Тип:</strong> {{ event.type }}</p>
+            <p><strong>Длительность:</strong> {{ event.duration }}</p>
+            <p><strong>Приглашенные участники:</strong> {{ event.participants }}</p>
+            <p><strong>Максимум участников:</strong> {{ event.max_participants }}</p>
+            <p><strong>Формат:</strong> {{ event.formats }}</p>
+            <a href="{{ url_for('event_details', event_id=event.id) }}">Подробнее</a>
+        </li>
+        <hr>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Пожалуйста, <a href="{{ url_for('login') }}">войдите</a>, чтобы просмотреть мероприятия.</p>
+{% endif %}
+{% endblock %}
